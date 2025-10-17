@@ -1,0 +1,50 @@
+ <div class="relative">
+        <!-- @let nameControl=registerForm.get('name'); -->
+        <input
+          [class]="{
+            'border-red-700': control()?.invalid && control()?.touched,
+          }"
+          [formControl]="control()"
+          [type]="showPassword()? 'text': inputType()"
+          [id]="inputId()"
+          class="main-input peer"
+          placeholder=" "
+        />
+        <label
+          [class]="{ 'text-red-700': control().invalid && control().touched }"
+          [for]="inputId()"
+          class="main-label"
+          >{{inputLabel()}}</label
+        >
+
+        @if(inputType() == "password") {
+          <span
+            (click)="showPassword.set(!showPassword())"
+            class="absolute top-1/2 -translate-y-1/2 end-4 cursor-pointer"
+          >
+            @if(showPassword()){
+            <i class="fa-solid fa-eye-slash"></i>
+            } @else {
+            <i class="fa-solid fa-eye"></i>
+            }
+          </span>
+        }
+
+      </div>
+      @if(control()?.errors && control()?.touched) {
+      <div>
+        @if(control()?.getError('required')) {
+        <p class="invalid-alert">This field is required.</p>
+        } @else if (control()?.getError('minlength')) {
+        <p class="invalid-alert">{{inputLabel()}} must be at least 3 characters.</p>
+        }@else if (control()?.getError('maxlength')) {
+        <p class="invalid-alert">{{inputLabel()}} must not exceed 20 characters.</p>
+        } @else if (control()?.getError('email')) {
+        <p class="invalid-alert">Invalid email format.</p>
+        } @else if (control()?.getError('pattern')) {
+        <p class="invalid-alert">{{patternMessage()}}</p>
+        } @else if (control().getError('mismatch')) {
+        <p class="invalid-alert">Both passwords must be the same.</p>
+        }
+      </div>
+      }

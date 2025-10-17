@@ -1,0 +1,4 @@
+  .my-pagination ::ng-deep .ngx-pagination .current {
+    background: var(--main-color);
+    border-radius: 20%;
+  }

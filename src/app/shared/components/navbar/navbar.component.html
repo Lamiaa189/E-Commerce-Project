@@ -1,0 +1,123 @@
+<nav class="bg-[#F8F9FA] border-gray-200 dark:bg-gray-900">
+  <div class="max-w-screen-xl flex items-center justify-between mx-auto p-4">
+    <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img src="/images/freshcart-logo.svg" alt="freshcart logo" />
+    </a>
+    <button
+      data-collapse-toggle="navbar-default"
+      type="button"
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      aria-controls="navbar-default"
+      aria-expanded="false"
+    >
+      <span class="sr-only">Open main menu</span>
+      <svg
+        class="w-5 h-5"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 17 14"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M1 1h15M1 7h15M1 13h15"
+        />
+      </svg>
+    </button>
+    <div class="hidden w-full ms-5 md:flex md:grow" id="navbar-default">
+      @if(isLogin()) {
+      <ul class="links-wrapper">
+        <li>
+          <a class="nav-link" aria-current="page" routerLink="/home" routerLinkActive="active-link"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a class="nav-link relative" aria-current="page" routerLink="/cart" routerLinkActive="active-link">
+            <svg class="w-5 h-5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01" />
+            </svg>
+            Cart
+            @if (cartItemsCount() > 0) {
+              <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {{ cartItemsCount() }}
+              </span>
+            }
+          </a>
+        </li>
+        <li>
+          <a class="nav-link relative" aria-current="page" routerLink="/wishlist" routerLinkActive="active-link">
+            <svg class="w-5 h-5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            Wishlist
+            @if (wishlistItemsCount() > 0) {
+              <span class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {{ wishlistItemsCount() }}
+              </span>
+            }
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" aria-current="page" routerLink="/orders" routerLinkActive="active-link">
+            <svg class="w-5 h-5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            Orders
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" aria-current="page" routerLink="/products" routerLinkActive="active-link"
+            >Products</a
+          >
+        </li>
+        <li>
+          <a class="nav-link" aria-current="page" routerLink="/categories" routerLinkActive="active-link"
+            >Categories</a
+          >
+        </li>
+        <li>
+          <a class="nav-link" aria-current="page" routerLink="/brands" routerLinkActive="active-link"
+            >Brands</a
+          >
+        </li>
+      </ul>
+      }
+
+      <ul class="links-wrapper ms-auto">
+        <li class="flex items-center space-x-2">
+          <a href="https://www.instagram.com" class="nav-link social-icon" aria-current="page" target="_blank">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://www.facebook.com" class="nav-link social-icon" aria-current="page" target="_blank">
+            <i class="fa-brands fa-facebook"></i>
+          </a>
+          <a href="https://twitter.com" class="nav-link social-icon" aria-current="page" target="_blank">
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+          <a href="https://www.linkedin.com" class="nav-link social-icon" aria-current="page" target="_blank">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <a href="https://www.youtube.com" class="nav-link social-icon" aria-current="page" target="_blank">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+        </li>
+        @if (!isLogin()) {
+        <li>
+          <a class="nav-link" aria-current="page" routerLink="/login" routerLinkActive="active-link">Login</a>
+        </li>
+        <li>
+          <a class="nav-link" aria-current="page" routerLink="/register" routerLinkActive="active-link">Register</a>
+        </li>
+        } @else {
+        <li>
+          <a class="nav-link cursor-pointer" aria-current="page" (click)="signout()">Signout</a>
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>

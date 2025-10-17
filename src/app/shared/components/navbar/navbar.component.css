@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+
+.nav-link {
+  @apply block py-2 px-4 text-center text-gray-600 hover:text-[var(--main-color)] transition-all duration-200 rounded-full hover:bg-gray-100;
+}
+
+.nav-link.active-link {
+  @apply hover:text-white hover:bg-[var(--main-color)];
+}
+
+.links-wrapper {
+  @apply font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg 
+  md:flex-row md:space-x-3 rtl:space-x-reverse md:mt-0 md:border-0 dark:border-gray-700;
+}
+
+.active-link {
+  @apply bg-[var(--main-color)] text-white shadow-md font-semibold;
+}
+
+.social-icon {
+  @apply px-1;
+}
+
+.nav-link {
+  @apply transition-all duration-500;
+}
+
+

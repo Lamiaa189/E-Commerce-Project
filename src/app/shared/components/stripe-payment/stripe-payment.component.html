@@ -1,0 +1,80 @@
+<div class="stripe-payment-container">
+  @if (!isInitialized()) {
+    <div class="flex items-center justify-center p-8">
+      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mr-3"></div>
+      <span class="text-gray-600">Initializing payment form...</span>
+    </div>
+  } @else {
+    <!-- Error Message -->
+    @if (errorMessage()) {
+      <div class="mb-4 bg-red-50 border border-red-200 rounded-md p-4">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-sm font-medium text-red-800">Payment Error</h3>
+            <div class="mt-2 text-sm text-red-700">
+              <p>{{ errorMessage() }}</p>
+            </div>
+            <div class="mt-4">
+              <button (click)="clearError()" class="bg-red-50 px-2 py-1.5 rounded-md text-sm font-medium text-red-800 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                Dismiss
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- Payment Form -->
+    <div class="space-y-6">
+      <!-- Payment Element Container -->
+      <div class="border border-gray-300 rounded-lg p-4">
+        <label class="block text-sm font-medium text-gray-700 mb-2">
+          Payment Information
+        </label>
+        <div [id]="containerId()" class="min-h-[50px]"></div>
+      </div>
+
+      <!-- Payment Summary -->
+      <div class="bg-gray-50 rounded-lg p-4">
+        <div class="flex justify-between items-center">
+          <span class="text-sm font-medium text-gray-700">Total Amount</span>
+          <span class="text-lg font-semibold text-gray-900">
+            ${{ amount().toFixed(2) }} {{ currency().toUpperCase() }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Pay Button -->
+      <button
+        (click)="processPayment()"
+        [disabled]="isProcessing()"
+        class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium flex items-center justify-center"
+      >
+        @if (isProcessing()) {
+          <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Processing Payment...
+        } @else {
+          Pay ${{ amount().toFixed(2) }}
+        }
+      </button>
+
+      <!-- Security Notice -->
+      <div class="text-center">
+        <div class="flex items-center justify-center text-sm text-gray-500">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          Secured by Stripe
+        </div>
+      </div>
+    </div>
+  }
+</div>

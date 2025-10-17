@@ -1,0 +1,65 @@
+<div class="card group/card">
+  <div [routerLink]="['/details', product().slug, product().id]" class="cursor-pointer">
+    <!-- Product Image -->
+    <div class="relative">
+      <img [src]="product().imageCover" [alt]="product().title" class="w-full h-48 object-cover" />
+      
+      <!-- Wishlist Button -->
+      <button
+        (click)="toggleWishlist(); $event.stopPropagation()"
+        [disabled]="addingToWishlist()"
+        class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-pink-50 hover:text-pink-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        [class.text-pink-600]="isInWishlist()"
+        [class.text-gray-400]="!isInWishlist()"
+        title="{{ isInWishlist() ? 'Remove from wishlist' : 'Add to wishlist' }}"
+      >
+        @if (addingToWishlist()) {
+          <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+        } @else {
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+          </svg>
+        }
+      </button>
+    </div>
+    <!-- Product Details -->
+    <div class="p-4 space-y-2">
+      <h3 class="text-sm text-gray-500 font-medium uppercase tracking-wide">
+        {{ product().category.name }}
+      </h3>
+      <h4 class="text-lg font-semibold text-gray-800 line-clamp-1 hover:text-blue-600 cursor-pointer">
+        {{ product().title }}
+      </h4>
+      <div class="flex items-center justify-between mt-3">
+        <p class="text-base font-bold text-green-600">{{ product().price }} EGP</p>
+        <p class="flex items-center gap-1 text-sm text-gray-600">
+          <i class="fa-solid fa-star text-yellow-400"></i>
+          {{ product().ratingsAverage }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <button (click)="addToCart(); $event.stopPropagation()" 
+          [disabled]="addingToCart()"
+          [class]="isInCart() ? 'btn bg-green-600 hover:bg-green-700 translate-y-[120%] group-hover/card:translate-y-0' : 'btn translate-y-[120%] group-hover/card:translate-y-0'">
+    @if (addingToCart()) {
+      <div class="flex items-center justify-center">
+        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Adding...
+      </div>
+    } @else {
+      @if (isInCart()) {
+        <span>In Cart ({{ getCartQuantity() }})</span>
+      } @else {
+        <span>Add To Cart</span>
+      }
+    }
+  </button>
+</div>

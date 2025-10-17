@@ -1,0 +1,66 @@
+<section class="auth-section">
+  <form [formGroup]="registerForm" (ngSubmit)="submitForm()" class="auth-form">
+    <div class="text-center mb-8">
+      <h1 class="auth-title">Create your account</h1>
+      <p class="mt-2 text-sm text-gray-500">Join us to start shopping smarter.</p>
+    </div>
+
+    <div class="mb-6">
+      <app-input
+        [control]="registerForm.get('name')"
+        inputType="text"
+        inputId="name"
+        inputLabel="Name"
+      ></app-input>
+    </div>
+
+    <div class="mb-6">
+      <app-input
+        [control]="registerForm.get('email')"
+        inputType="email"
+        inputId="email"
+        inputLabel="Email"
+      ></app-input>
+    </div>
+
+    <div class="mb-6">
+      <app-input
+        [control]="registerForm.get('password')"
+        inputType="password"
+        inputId="password"
+        inputLabel="Password"
+        patternMessage="Password must be at least 6 characters."
+      ></app-input>
+    </div>
+
+    <div class="mb-6">
+      <app-input
+        [control]="registerForm.get('rePassword')"
+        inputType="password"
+        inputId="rePassword"
+        inputLabel="RePassword"
+      ></app-input>
+    </div>
+
+    <div>
+      <app-input
+        [control]="registerForm.get('phone')"
+        inputType="phone"
+        inputId="phone"
+        inputLabel="Phone"
+        patternMessage="Accept only egypt phone numbers."
+      ></app-input>
+    </div>
+
+    <button type="submit" class="btn my-8">
+      @if(isLoading()) {
+      <i class="fa-solid fa-spinner animate-spin"></i>
+      } Create account
+    </button>
+
+    <p class="text-center text-sm text-gray-600">
+      Already have an account?
+      <a routerLink="/login" class="auth-link">Sign in</a>
+    </p>
+  </form>
+</section>

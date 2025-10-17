@@ -1,0 +1,199 @@
+<!-- Breadcrumb -->
+<div class="bg-gray-50 py-4">
+  <div class="container mx-auto px-4">
+    <nav class="flex" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <li class="inline-flex items-center">
+          <a routerLink="/" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+            </svg>
+            Home
+          </a>
+        </li>
+        <li>
+          <div class="flex items-center">
+            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <a routerLink="/brands" class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2">Brands</a>
+          </div>
+        </li>
+        <li>
+          <div class="flex items-center">
+            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2">{{ brand()?.name || 'Brand' }}</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<!-- Brand Header -->
+@if (brand()) {
+  <div class="bg-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+        <!-- Brand Image -->
+        <div class="flex-shrink-0">
+          <div class="w-32 h-32 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
+            <img
+              [src]="brand()?.image"
+              [alt]="brand()?.name"
+              class="max-w-full max-h-full object-contain"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        
+        <!-- Brand Info -->
+        <div class="flex-1 text-center md:text-left">
+          <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ brand()?.name }}</h1>
+          <p class="text-lg text-gray-600 mb-4">
+            Discover products from {{ brand()?.name }}. Quality products from a trusted brand.
+          </p>
+          <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+              {{ totalProducts() }} Products
+            </span>
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+              Trusted Brand
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Search and Filter Section -->
+<div class="bg-gray-50 py-6">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+      <!-- Search -->
+      <div class="flex-1 max-w-md">
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <input
+            type="text"
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="onSearchChange()"
+            class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Search products..."
+          />
+        </div>
+      </div>
+
+      <!-- Sort -->
+      <div class="flex gap-2">
+        <select
+          [(ngModel)]="sortBy"
+          (ngModelChange)="onSortChange()"
+          class="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+        >
+          <option value="name">Sort by Name</option>
+          <option value="price">Sort by Price</option>
+          <option value="rating">Sort by Rating</option>
+        </select>
+        <select
+          [(ngModel)]="sortOrder"
+          (ngModelChange)="onSortChange()"
+          class="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+        >
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Loading State -->
+@if (loading()) {
+  <div class="container mx-auto px-4 py-8">
+    <div class="flex justify-center items-center">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+    </div>
+    <p class="text-center text-gray-600 mt-4">Loading brand details...</p>
+  </div>
+}
+
+<!-- Error State -->
+@if (error() && !loading()) {
+  <div class="container mx-auto px-4 py-8">
+    <div class="text-center">
+      <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
+        <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+        </svg>
+      </div>
+      <h3 class="text-lg font-medium text-gray-900 mb-2">Error Loading Brand</h3>
+      <p class="text-gray-600 mb-4">{{ error() }}</p>
+      <button
+        (click)="loadBrandDetails(route.snapshot.params['id'])"
+        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+      >
+        Try Again
+      </button>
+    </div>
+  </div>
+}
+
+<!-- Products Section -->
+@if (!loading() && !error()) {
+  <div class="container mx-auto px-4 py-8">
+    <!-- Products Loading -->
+    @if (productsLoading()) {
+      <div class="flex justify-center items-center py-8">
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <span class="ml-2 text-gray-600">Loading products...</span>
+      </div>
+    }
+
+    <!-- No Products -->
+    @if (!productsLoading() && products().length === 0) {
+      <div class="text-center py-12">
+        <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-gray-100 mb-4">
+          <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">No Products Found</h3>
+        <p class="text-gray-600 mb-4">This brand doesn't have any products available at the moment.</p>
+      </div>
+    }
+
+    <!-- Products Grid -->
+    @if (!productsLoading() && products().length > 0) {
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        @for (product of products(); track product.id) {
+          <app-card [product]="product"></app-card>
+        }
+      </div>
+
+      <!-- Pagination -->
+      @if (getTotalPages() > 1) {
+        <div class="mt-8 flex justify-center">
+          <pagination-controls
+            (pageChange)="onPageChange($event)"
+            [maxSize]="5"
+            [directionLinks]="true"
+            [autoHide]="true"
+            [responsive]="true"
+            previousLabel="Previous"
+            nextLabel="Next"
+            class="pagination"
+          ></pagination-controls>
+        </div>
+      }
+    }
+  </div>
+}

@@ -1,0 +1,74 @@
+/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+@layer components {
+  .btn {
+    @apply disabled:bg-gray-500 disabled:cursor-not-allowed w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 cursor-pointer;
+  }
+
+  .main-input {
+    @apply block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600;
+  }
+
+  .main-label {
+    @apply absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1;
+  }
+
+  .invalid-alert {
+    @apply mt-2 text-sm text-red-600 dark:text-red-500;
+  }
+
+  .auth-section {
+    @apply min-h-[calc(100vh-120px)] flex items-center justify-center bg-gray-50 py-10 px-4;
+  }
+
+  .auth-form {
+    @apply w-full max-w-xl bg-white rounded-2xl shadow-lg p-6 sm:p-8;
+  }
+
+  .auth-title {
+    @apply text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900;
+  }
+
+  .auth-link {
+    @apply text-green-700 hover:text-green-800 font-medium underline underline-offset-4;
+  }
+}
+
+:root {
+    --main-color: #0aad0a;
+}
+
+body {
+  font-family: "Edu NSW ACT Cursive", cursive;
+}
+
+.card {
+  @apply bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition duration-300;
+}
+
+.btn-main {
+  background-color: var(--main-color);
+  padding: 7px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+.btn-main:disabled {
+  cursor: not-allowed;
+  background-color: #ccc;
+}
+.btn-main:disabled:hover {
+  background-color: #ccc;
+}
+.btn-main:hover {
+  background-color: #11bd11;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

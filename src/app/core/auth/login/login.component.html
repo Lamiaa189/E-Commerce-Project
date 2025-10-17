@@ -1,0 +1,66 @@
+<section class="auth-section">
+  <form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="auth-form">
+    <div class="text-center mb-8">
+      <h1 class="auth-title">Login</h1>
+    </div>
+    <div class="mb-6">
+      <div class="relative">
+        <input
+          formControlName="email"
+          type="email"
+          id="email"
+          class="main-input peer"
+          placeholder=" "
+        />
+        <label for="email" class="main-label">Email</label>
+      </div>
+      @let emailControl = loginForm.get("email"); @if(emailControl?.touched &&
+      emailControl?.errors){ @if(emailControl?.getError("required")){
+      <p class="invalid-alert">This field is required.</p>
+      } @else if (emailControl?.getError("email")) {
+      <p class="invalid-alert">Invalid email format.</p>
+      } }
+    </div>
+    <div>
+      <div class="relative">
+        <input
+          formControlName="password"
+          type="password"
+          id="password"
+          class="main-input peer"
+          placeholder=" "
+        />
+        <label for="password" class="main-label">Password</label>
+      </div>
+      @let passwordControl = loginForm.get("password"); @if(passwordControl?.touched &&
+      passwordControl?.getError("required")){
+      <p class="invalid-alert">This field is required.</p>
+      }
+    </div>
+
+    <div class="text-right mb-4">
+      <a
+        routerLink="/forgot-password"
+        class="text-sm text-blue-600 hover:text-blue-500"
+      >
+        Forgot Password?
+      </a>
+    </div>
+
+    <button type="submit" class="btn my-8">
+        @if(isLoading()) {
+            <i class="fa-solid fa-spinner animate-spin"></i>
+        }
+      Login
+    </button>
+
+    <p class="text-center text-sm text-gray-600">
+      New to FreahCart
+      <a
+        routerLink="/register"
+        class="auth-link"
+        >Create new account</a
+      >
+    </p>
+  </form>
+</section>

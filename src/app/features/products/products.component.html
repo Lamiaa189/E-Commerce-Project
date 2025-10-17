@@ -1,0 +1,18 @@
+<section class="bg-gray-100 py-16 border border-gray-300">
+  <div class="container mx-auto px-4">
+    <!-- Section Title -->
+    <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">Products</h2>
+
+    <!-- Products Grid -->
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+      @for (product of productsList() | paginate: { id: 'foo', itemsPerPage: pageSize, currentPage:
+      p, totalItems: total }; track product.id) {
+      <app-card [product]="product"></app-card>
+      }
+    </div>
+  </div>
+
+  <div class="flex justify-center mt-10">
+      <pagination-controls class="my-pagination" id="foo" (pageChange)="getAllProductsData($event)"> </pagination-controls>
+  </div>
+</section>

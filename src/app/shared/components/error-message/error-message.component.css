@@ -1,0 +1,43 @@
+/* Error Message Component Styles */
+.error-message-container {
+  transition: all 0.3s ease-in-out;
+}
+
+.error-message-container:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Animation for dismiss button */
+.dismiss-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.dismiss-button:hover {
+  transform: scale(1.1);
+}
+
+.dismiss-button:active {
+  transform: scale(0.95);
+}
+
+/* Icon animations */
+.error-icon {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .error-message-container {
+    margin: 0.5rem;
+  }
+}

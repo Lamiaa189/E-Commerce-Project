@@ -1,0 +1,18 @@
+/* Print styles for order confirmation */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+  }
+  
+  .bg-gray-50 {
+    background: white !important;
+  }
+  
+  .shadow-sm {
+    box-shadow: none !important;
+  }
+}
